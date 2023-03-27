@@ -54,16 +54,18 @@ exports.getAverageAge = (req, res) => {
     const query =  `
         SELECT AVG(
             cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', birth_date) as int)
-        ) as 'Average' 
+        ) as 'average' 
         FROM pets
         WHERE species = ?
     `;
 
-    console.log(req.query.species)
-
     const params = [
         req.query.species
     ];
+
+    if(req.query.species == null) {
+        res.status(500).send("Species not specified in request body.");
+    }
 
     db.all(query, params, (err, rows) => {
         if (err) {
