@@ -31,7 +31,7 @@ router.get('/pets/species/average_age', (req, res) => {
         #swagger.description = "Get the average age of all pets of specific species."
 
         #swagger.parameters['species'] = {
-            in: 'body',
+            in: 'query',
             description: 'Species name',
             required: true
         }
